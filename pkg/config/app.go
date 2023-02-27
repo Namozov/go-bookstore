@@ -9,7 +9,7 @@ var (
 )
 
 func Connect(){
-	d, err := gorm.Open("mysql","root:5654@tcp(localhost:3306)/simplerest?charset=utf8&parseTime=True&loc=Local")
+	d, err := gorm.Open("mysql","root:12-maktabA@tcp(localhost:3306)/simplerest?charset=utf8&parseTime=True&loc=Local")
 	if err != nil{
 		panic(err)
 	}
@@ -17,28 +17,4 @@ func Connect(){
 }
 func GetDB() *gorm.DB{
 	return db
-}
-
-func (b *Book) CreateBook() *Book{
-	db.NewRecord(b)
-	db.Create(&b)
-	return b
-}
-
-func GetAllBooks() []Book{
-	var Books []Book
-	db.Find(&Books)
-	return Books
-}
-
-func GetBookById(ID int64)(*Book, *gorm.DB){
-	var getBook Book
-	db := db.Where("ID=?", ID).Find(&getBook)
-	return &getBook, db
-}
-
-func DeleteBook(ID int64) Book{
-	var book Book
-	db.Where("ID=?", ID).Delete(book)
-	return book
 }
